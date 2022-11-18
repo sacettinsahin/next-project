@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../ui/Logo";
 import { FaUserAlt, FaShoppingCart, FaSearch } from "react-icons/fa";
+import OutsideClickHandler from "react-outside-click-handler";
+import Title from "../ui/Title";
+
 const Header = () => {
+  const [isSearchModal, setIsSearchModal] = useState(false);
   return (
     <div className="h-[5.5rem] bg-secondary  ">
       <div className="container text-white mx-auto  flex justify-between items-center h-full">
@@ -23,20 +27,30 @@ const Header = () => {
           </ul>
         </nav>
         <div className="flex gap-x-4 items-center">
-          <a href="" className="hover:text-primary">
+          <a href="" className="hover:text-primary transition-all">
             <FaUserAlt />
           </a>
-          <a href="" className="hover:text-primary">
+          <a href="" className="hover:text-primary transition-all">
             <FaShoppingCart />
           </a>
-          <a href="" className="hover:text-primary">
+          <button
+            onClick={() => setIsSearchModal(true)}
+            className="hover:text-primary transition-all"
+          >
             <FaSearch />
-          </a>
+          </button>
           <a href="">
             <button className="btn-primary">Order Online</button>
           </a>
         </div>
       </div>
+      {isSearchModal && (
+        <OutsideClickHandler onOutsideClick={() => setIsSearchModal(false)}>
+          <div className="">
+            <Title addClass="text-red-300">Search</Title>
+          </div>
+        </OutsideClickHandler>
+      )}
     </div>
   );
 };
