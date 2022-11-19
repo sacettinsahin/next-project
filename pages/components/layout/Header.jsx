@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import Logo from "../ui/Logo";
 import { FaUserAlt, FaShoppingCart, FaSearch } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/Gi";
 
 import Search from "../ui/Search";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);
+  const [isMenuModal, setIsMenuModal] = useState(false);
   return (
     <div className="h-[5.5rem] bg-secondary  ">
       <div className="container text-white mx-auto  flex justify-between items-center h-full">
         <Logo />
-        <nav>
-          <ul className="flex gap-x-2">
+        <nav
+          className={`sm:static absolute top-0 left-0  sm:w-auto w-full h-full sm:text-white text-black 
+          sm:bg-transparent bg-white sm:flex hidden ${
+            isMenuModal === true && " !flex justify-center "
+          }`}
+        >
+          <ul className="flex gap-x-2 sm:flex-row flex-col items-center justify-center">
             <li className="px-[5px] py-[20px] uppercase cursor-pointer hover:text-primary">
               <a href="">HOME</a>
             </li>
@@ -25,6 +33,17 @@ const Header = () => {
               <a href="">BOOK TABLE</a>
             </li>
           </ul>
+          {isMenuModal && (
+            <button
+              onClick={() => setIsMenuModal(false)}
+              className="sm:hidden inline-block"
+            >
+              <AiOutlineCloseCircle
+                size={25}
+                className="hover:text-primary transition-all absolute top-5 right-5 "
+              />
+            </button>
+          )}
         </nav>
         <div className="flex gap-x-4 items-center">
           <a href="" className="hover:text-primary transition-all">
@@ -39,9 +58,20 @@ const Header = () => {
           >
             <FaSearch />
           </button>
-          <a href="">
+          <a href="" className="md:inline-block hidden">
+            {/* md ye kadar inline block, daha sonra gizlen. */}
             <button className="btn-primary">Order Online</button>
           </a>
+
+          <button
+            onClick={(e) => setIsMenuModal(true)}
+            className="sm:hidden inline-block"
+          >
+            <GiHamburgerMenu
+              size={24}
+              className="hover:text-primary transition-all "
+            />
+          </button>
         </div>
       </div>
       {isSearchModal && <Search setIsSearchModal={setIsSearchModal} />}
