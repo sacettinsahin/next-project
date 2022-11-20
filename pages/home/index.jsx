@@ -1,8 +1,11 @@
 import React from "react";
+import Carousel from "../components/carousel";
 
 const Index = () => {
   return (
-    <div className="text-red-700 font-dancing font-semibold font text-3xl text-center"></div>
+    <div className="relative">
+      <Carousel />
+    </div>
   );
 };
 

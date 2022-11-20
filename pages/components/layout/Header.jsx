@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import Logo from "../ui/Logo";
+import Search from "../ui/Search";
+import { useRouter } from "next/router";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaUserAlt, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/Gi";
-
-import Search from "../ui/Search";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);
   const [isMenuModal, setIsMenuModal] = useState(false);
+  const router = useRouter();
+
   return (
-    <div className="h-[5.5rem] bg-secondary  ">
+    <div
+      className={`h-[5.5rem] z-50 relative ${
+        router.asPath === "/" ? "bg-transparent" : "bg-secondary"
+      } `}
+    >
       <div className="container text-white mx-auto  flex justify-between items-center h-full">
         <Logo />
         <nav
-          className={`sm:static absolute top-0 left-0  sm:w-auto w-full h-full sm:text-white text-black 
-          sm:bg-transparent bg-white sm:flex hidden ${
+          className={`sm:static absolute top-0 left-0  sm:w-auto w-full h-screen sm:text-white text-black 
+          sm:bg-transparent bg-white sm:flex hidden  ${
             isMenuModal === true && " !flex justify-center "
           }`}
         >
